@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movie List</title>
+    <style>
+        .movie-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .movie-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Now Showing</h1>
+    <div class="movie-list">
+        <div th:each="movie : ${movies}" class="movie-card fade-in">
+            <h2 th:text="${movie.title}"></h2>
+            <p th:text="${movie.genre}"></p>
+            <p th:text="${movie.description}"></p>
+            <a th:href="@{/movies/{id}(id=${movie.id})}">Book Now</a>
+        </div>
+    </div>
+</body>
+</html>
